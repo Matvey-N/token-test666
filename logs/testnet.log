@@ -1,0 +1,64 @@
+
+======================================================================
+STEP 1. Deploy MyTokenV1 implementation + MyTokenProxy  |  network: testnet  |  2026-10-13T23:45:07.075Z
+======================================================================
+Deployer (owner): 0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F
+
+MyTokenV1 implementation: 0x22f3e8429f9b9Dd5E5DD60F4b939a6eDdE9aD2B5
+  deploy tx: https://sepolia.etherscan.io/tx/0xfbd89195d3da749b8f4d13010ffe98bd16f5a0b35b5ba0cc886f2ce72f838f5e
+
+MyTokenProxy (token address): 0x84Fa5B6C8849Db51f152ddfF03FAd7db692B4F26
+  deploy tx: https://sepolia.etherscan.io/tx/0x52b4ca0439da35466b903962b77074423e15a1b3914e59e60cd098edb2406ccc
+
+Check through the proxy:
+  implementation slot -> 0x22f3e8429f9b9Dd5E5DD60F4b939a6eDdE9aD2B5
+  name / symbol       -> MyToken / MTK
+  owner               -> 0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F
+  totalSupply         -> 1000000.0 MTK
+  balance of deployer -> 1000000.0 MTK
+
+Token page: https://sepolia.etherscan.io/address/0x84Fa5B6C8849Db51f152ddfF03FAd7db692B4F26
+
+======================================================================
+STEP 2. Mint and transfer on the V1 proxy  |  network: testnet  |  2026-10-13T23:46:06.938Z
+======================================================================
+Proxy:     0x84Fa5B6C8849Db51f152ddfF03FAd7db692B4F26
+Owner:     0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F
+Recipient: 0x5Bc1D7eFBC282D6bdE904Cae50CC4BA2E299e485
+
+mint(0x5Bc1D7eFBC282D6bdE904Cae50CC4BA2E299e485, 500.0 MTK)
+  tx: https://sepolia.etherscan.io/tx/0x3ab5f9bcd0e2ac49148f81eb1b271068aeefd5e6702522fa05f5d248caf6bb75
+
+transfer(0x5Bc1D7eFBC282D6bdE904Cae50CC4BA2E299e485, 100.0 MTK)  from owner
+  tx: https://sepolia.etherscan.io/tx/0x17b52fce1d8942a1a2069901a90c38f76cf0e7bab290ce96022d8f178fbe2c13
+
+Balances on V1:
+  0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F -> 999900.0 MTK
+  0x5Bc1D7eFBC282D6bdE904Cae50CC4BA2E299e485 -> 600.0 MTK
+  totalSupply -> 1000500.0 MTK
+
+======================================================================
+STEP 3. Upgrade the proxy to MyTokenV2  |  network: testnet  |  2026-10-13T23:49:45.110Z
+======================================================================
+Implementation before: 0x22f3e8429f9b9Dd5E5DD60F4b939a6eDdE9aD2B5
+version() before     : (reverts: function does not exist in V1)
+
+MyTokenV2 implementation: 0x0C7F47BEe461aC8479dEBD4173099028d58Cb143
+  deploy tx: https://sepolia.etherscan.io/tx/0xac2b59ae3895bf88fa9cedecc0fa34a6ebe18a80df3f537e44df1ae82a7a02fe
+
+upgradeToAndCall( 0x0C7F47BEe461aC8479dEBD4173099028d58Cb143 ) through the proxy
+  upgrade tx: https://sepolia.etherscan.io/tx/0xa37f571e5906b052b7714a02516703755545b79f457777fd38e492e1ae21d37d
+
+Validation:
+  proxy address (unchanged): 0x84Fa5B6C8849Db51f152ddfF03FAd7db692B4F26
+  implementation after     : 0x0C7F47BEe461aC8479dEBD4173099028d58Cb143 OK (= V2)
+
+  Balances before -> after upgrade:
+   0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F: 999900.0 MTK -> 999900.0 MTK OK
+   0x5Bc1D7eFBC282D6bdE904Cae50CC4BA2E299e485: 600.0 MTK -> 600.0 MTK OK
+   totalSupply: 1000500.0 MTK -> 1000500.0 MTK OK
+  owner after              : 0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F
+
+  version() after upgrade  : V2
+
+RESULT: upgrade successful, balances unchanged.

@@ -1,0 +1,10 @@
+node_modules
+cache
+artifacts
+ignition/deployments/chain-31337
+.env
+.openzeppelin
+deployments/localhost.json
+deployments/hardhat.json
+logs/localhost.log
+logs/hardhat.log
