@@ -91,14 +91,14 @@ Owner `0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F` → recipient (second MetaMas
 - Mint 500 MTK: https://sepolia.etherscan.io/tx/0x3ab5f9bcd0e2ac49148f81eb1b271068aeefd5e6702522fa05f5d248caf6bb75
 - Transfer 100 MTK: https://sepolia.etherscan.io/tx/0x17b52fce1d8942a1a2069901a90c38f76cf0e7bab290ce96022d8f178fbe2c13
 
-![Mint and transfer](screenshots/1-mint-transfer.png)
+![Mint and transfer](screenshots/1-mint-transfer.jpg)
 
 ### 2. Upgrade transaction
 
 - V2 implementation deployment: https://sepolia.etherscan.io/tx/0xac2b59ae3895bf88fa9cedecc0fa34a6ebe18a80df3f537e44df1ae82a7a02fe
 - Upgrade transaction (`upgradeToAndCall`, emits `Upgraded(0x0C7F…b143)`): https://sepolia.etherscan.io/tx/0xa37f571e5906b052b7714a02516703755545b79f457777fd38e492e1ae21d37d
 
-![Upgrade transaction](screenshots/2-upgrade.png)
+![Upgrade transaction](screenshots/2-upgrade.jpg)
 
 ### 3. Balances after the upgrade
 
@@ -108,13 +108,13 @@ Owner `0xb9DBB54DC53CdE8Ab826fD8a1B9D41909C10df0F` → recipient (second MetaMas
 | Recipient `0x5Bc1…e485` | 600 MTK | 600 MTK |
 | Total supply | 1,000,500 MTK | 1,000,500 MTK |
 
-![Balances after upgrade](screenshots/3-balances.png)
+![Balances after upgrade](screenshots/3-balances.jpg)
 
 ### 4. `version()` after the upgrade
 
 Before the upgrade `version()` reverts (the function does not exist in V1); after it, the call through the proxy returns `"V2"`.
 
-![version() returns V2](screenshots/4-version.png)
+![version() returns V2](screenshots/4-version.jpg)
 
 ### Logs
 
